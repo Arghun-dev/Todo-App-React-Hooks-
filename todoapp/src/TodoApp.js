@@ -1,9 +1,20 @@
 import React from 'react';
+import {withStyles} from '@material-ui/styles';
+import Paper from '@material-ui/core/Paper';
 
-function TodoApp() {
+const styles = {
+    root: {
+        marginLeft: '10%',
+        marginRight: '10%',
+        marginTop: '5%'
+    }
+}
+
+function TodoApp(props) {
+    const {classes} = props
     return (
-        <h1>TodoApp</h1>
+        <Paper className={classes.root}>TodoApp</Paper>
     )
 }
 
-export default TodoApp;
+export default withStyles(styles)(TodoApp);
