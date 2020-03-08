@@ -1,6 +1,7 @@
 import React from 'react';
 import {withStyles} from '@material-ui/styles';
 import Paper from '@material-ui/core/Paper';
+import TodoForm from './TodoForm';
 
 const styles = {
     root: {
@@ -13,7 +14,9 @@ const styles = {
 function TodoApp(props) {
     const {classes} = props
     return (
-        <Paper className={classes.root}>TodoApp</Paper>
+        <Paper className={classes.root}>
+            <TodoForm />
+        </Paper>
     )
 }
 
