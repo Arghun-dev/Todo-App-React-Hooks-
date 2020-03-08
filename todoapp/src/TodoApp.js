@@ -33,6 +33,11 @@ function TodoApp(props) {
         setTodos(updatedTodos)
     }
 
+    const toggleTodo = (todoId) => {
+        const updatedTodos = todos.map(todo => todo.id === todoId ? {...todo, completed: !todo.completed} : todo);
+        setTodos(updatedTodos);
+    }
+
     return (
         <Container maxWidth='md'>
             <Paper className={classes.root} elevation={3}>
@@ -42,6 +47,7 @@ function TodoApp(props) {
                 <TodoList
                     todos={todos} 
                     deleteTodo={deleteTodo}
+                    toggleTodo={toggleTodo}
                 />
             </Paper>
         </Container>

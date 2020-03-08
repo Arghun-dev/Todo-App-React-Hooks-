@@ -11,27 +11,33 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Divider from '@material-ui/core/Divider';
 
+
 const styles = {
     root: {
         marginTop: '5%'
+    },
+
+    lineThrough: {
+        textDecoration: 'line-through'
     }
 }
 
-function TodoList({todos, deleteTodo, classes}) {
+function TodoList({todos, deleteTodo, toggleTodo, classes}) {
     return (
         <List className={classes.root}>
         {todos.map(todo => {
             return (
               <>  
                 <ListItem key={todo.id} role={undefined} dense button>
-                    <ListItemIcon>
-                    <Checkbox
-                        edge="start"
-                        tabIndex={-1}
-                        disableRipple
-                    />
+                    <ListItemIcon onClick={() => toggleTodo(todo.id)}>
+                        <Checkbox
+                            edge="start"
+                            tabIndex={-1}
+                            disableRipple
+                            checked={todo.completed}
+                        />
                     </ListItemIcon>
-                    <ListItemText primary={todo.task} />
+                    <ListItemText primary={todo.task} className={todo.completed ? `${classes.lineThrough}` : ''} />
                     <ListItemSecondaryAction>
                     <IconButton edge="end">
                         <EditIcon />
