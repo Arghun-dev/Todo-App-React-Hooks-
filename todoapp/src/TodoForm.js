@@ -5,6 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
+import useInputState from './hooks/useInputState';
 
 const styles = {
     addIcon: {
@@ -20,17 +21,26 @@ const styles = {
     }
 }
 
-function TodoForm(props) {
-    const {classes} = props
+function TodoForm({addTodo, classes}) {
+    const [state, handleChange, reset] = useInputState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        addTodo(state);
+        reset();
+    }
+
     return(
         <>
-            <form noValidate autoComplete="off">
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
                 <TextField 
                     id="standard-basic" 
                     label="New Todo" 
-                    className={classes.textField} 
+                    className={classes.textField}
+                    onChange={handleChange} 
+                    value={state}
                 />
-                <Tooltip title="Add" aria-label="add" className={classes.addIcon}>
+                <Tooltip title="Add" aria-label="add" className={classes.addIcon} onClick={handleSubmit}>
                     <Fab color="primary" className={classes.fab}>
                     <AddIcon />
                     </Fab>

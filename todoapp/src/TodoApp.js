@@ -4,6 +4,7 @@ import TodoList from './TodoList';
 import {withStyles} from '@material-ui/styles';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import uuid from 'uuid/v4';
 
 const styles = {
     root: {
@@ -22,12 +23,25 @@ const initialTodos = [
 function TodoApp(props) {
     const {classes} = props;
     const [todos, setTodos] = useState(initialTodos);
+
+    const addTodo = (newTask) => {
+        setTodos([...todos, {id: uuid(), task: newTask, completed: false}])
+    }
+
+    const deleteTodo = (todoId) => {
+        const updatedTodos = todos.filter(todo => todo.id !== todoId);
+        setTodos(updatedTodos)
+    }
+
     return (
         <Container maxWidth='md'>
             <Paper className={classes.root} elevation={3}>
-                <TodoForm />
+                <TodoForm
+                    addTodo={addTodo} 
+                />
                 <TodoList
                     todos={todos} 
+                    deleteTodo={deleteTodo}
                 />
             </Paper>
         </Container>
